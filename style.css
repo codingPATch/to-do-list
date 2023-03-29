@@ -1,0 +1,126 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+footer {
+    bottom: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+h4 {
+    text-decoration: underline;
+    margin-bottom: -7px;
+}
+
+.hinweis {
+    text-decoration: none;
+    margin-bottom: -7px;
+}
+
+#new-task {
+    width: 60%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin: 10px auto;
+    display: block;
+}
+
+#add-task {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#add-task:hover {
+    background-color: #3e8e41;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: white;
+    padding: 10px;
+    margin: 10px auto;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+img {
+    width: 25px;
+    float: right;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.completed {
+    text-decoration: line-through;
+}
+
+.tooltip {
+    display: inline-block;
+    position: relative;
+    font-size: xx-large;
+    text-align: left;
+}
+
+.tooltip .right {
+    min-width: 250px;
+    top: 50%;
+    left: 100%;
+    margin-left: 20px;
+    transform: translate(0, -50%);
+    padding: 10px 20px;
+    color: #FFFFFF;
+    background-color: #444444;
+    font-weight: normal;
+    font-size: 13px;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 99999999;
+    box-sizing: border-box;
+    box-shadow: 0 1px 8px #000000;
+    display: none;
+}
+
+.tooltip:hover .right {
+    display: block;
+    margin-top: 100px;
+}
+
+.tooltip .right i {
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -12px;
+    width: 12px;
+    height: 24px;
+    overflow: hidden;
+}
+
+.tooltip .right i::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 0;
+    top: 50%;
+    transform: translate(50%, -50%) rotate(-45deg);
+    background-color: #444444;
+    box-shadow: 0 1px 8px #000000;
+}
