@@ -20,8 +20,6 @@ function addTask() {
     let newTaskInput = document.getElementById("new-task");
     let newTask = newTaskInput.value.trim();
 
-
-
     // Neue Aufgabe zum Array hinzufügen
     if (newTask) {
         tasks.push(newTask);
@@ -29,46 +27,34 @@ function addTask() {
         saveTasks(); // Aktualisierte Aufgaben im Local Storage speichern
         renderTasks();
     }
-
 }
 
-// Beim Laden der Seite Aufgaben aus dem Local Storage laden
-loadTasks();
-renderTasks();
-
-// Funktion zum Überprüfen des Accesscodes
-function checkAccess(code) {
+// Beim Laden der Seite Aufgaben aus dem Local Storage laden und Zugangscode abfragen
+function init() {
+    loadTasks();
     const storedCode = localStorage.getItem('accessCode');
-    return code === storedCode;
-}
-
-// Funktion zum Setzen des Passworts
-function setAccessCode() {
-    let code = prompt("Bitte geben Sie ein Zugangspasswort für diese Seite ein.");
-    localStorage.setItem('accessCode', code);
-    alert("Das Passwort wurde erfolgreich gesetzt.");
-}
-
-// Überprüfen, ob das Passwort bereits gesetzt wurde
-if (!localStorage.getItem('accessCode')) {
-    setAccessCode();
+    if (!storedCode) {
+        const code = prompt("Bitte geben Sie ein Zugangspasswort für diese Seite ein.");
+        localStorage.setItem('accessCode', code);
+        alert("Das Passwort wurde erfolgreich gesetzt.");
+    } else {
+        const inputCode = prompt("Bitte geben Sie den Zugangscode ein.");
+        if (inputCode !== storedCode) {
+            alert("Falsches Passwort. Sie haben keine Zugriffsberechtigung für diese Seite.");
+            return;
+        }
+    }
+    renderTasks();
 }
 
 // Event-Listener für das Hinzufügen von Aufgaben
 document.getElementById("add-task").addEventListener("click", function(event) {
-    // Überprüfen, ob der Benutzer zugriffsberechtigt ist
-    let code = prompt("Bitte geben Sie den Zugangscode ein, um eine neue Aufgabe zu erstellen.");
-    if (checkAccess(code)) {
-        addTask();
-    } else {
-        alert("Falsches Passwort. Sie haben keine Zugriffsberechtigung für diese Seite.");
-    }
+    addTask();
 });
 
 function renderTasks() {
     let taskList = document.getElementById("task-list");
     taskList.innerHTML = "";
-
 
     tasks.forEach((task, index) => {
         let li = document.createElement("li");
@@ -98,19 +84,15 @@ function renderTasks() {
 
         // Event-Listener für das Klicken auf das Mülleimer-Bild hinzufügen
         trash.addEventListener("click", function(event) {
-            // Überprüfen, ob der Benutzer zugriffsberechtigt ist
-            let code = prompt("Bitte geben Sie den Zugangscode ein, um diese Aufgabe zu löschen.");
-            if (checkAccess(code)) {
-                // Aufgabe aus dem Array entfernen
-                tasks.splice(index, 1);
-                saveTasks(); // Aktualisierte Aufgaben im Local Storage speichern
-                renderTasks();
-            } else {
-                alert("Falsches Passwort. Sie haben keine Zugriffsberechtigung für diese Seite.");
-            }
+            // Aufgabe aus dem Array entfernen
+            tasks.splice(index, 1);
+            saveTasks(); // Aktualisierte Aufgaben im Local Storage speichern
+            renderTasks();
         });
 
         taskList.appendChild(li);
     });
 
 }
+
+init();
