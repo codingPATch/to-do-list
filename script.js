@@ -41,6 +41,7 @@ function init() {
         const inputCode = prompt("Bitte geben Sie den Zugangscode ein.");
         if (inputCode !== storedCode) {
             alert("Falsches Passwort. Sie haben keine Zugriffsberechtigung für diese Seite.");
+            window.location.href = "about:blank"; // Seite schließen
             return;
         }
     }
